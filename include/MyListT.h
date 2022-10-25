@@ -11,11 +11,11 @@ class MyListT
 public:
     //缺省构造
     MyListT():m_head(nullptr),m_tail(nullptr){}
-    MyListT(MyListT const& that)
+    MyListT(MyListT const& that):m_head(nullptr),m_tail(nullptr)//创建空间的时候可能有初值。
     {
         for(node* pnode=that.m_head;pnode;pnode=pnode->m_next)
         {
-            push_back(pnode->data);
+            push_back(pnode->m_data);
         }
     }
     ~MyListT()
@@ -220,6 +220,45 @@ public:
             }
         // l.m_cur->m_prev->m_next=pnode;结果正确，行为错误。
         // l.m_cur->m_next->m_prev=pnode;错误的。这里m_cur应该是pnode的next节点
+    }
+    class const_iterator
+    {
+    public:
+        const_iterator(iterator const & it):m_it(it){}
+        T const& operator*()
+        {
+            return *m_it;  
+        }
+        const_iterator& operator++()
+        {
+            ++m_it;
+            return *this;
+        }
+        const_iterator& operator--()
+        {
+            --m_it;
+            return *this;
+        }
+        bool operator==(const_iterator const & that)
+        {
+            return m_it==that.m_it;
+        }
+        bool operator!=(const_iterator const& that)
+        {
+            return !(*this==that);
+        }
+    private:
+        iterator m_it;
+    };
+    //获取起始迭代器
+    const_iterator begin()const
+    {
+        return iterator(m_head,m_head,m_tail);   
+    }
+    //获取终止迭代器
+    const_iterator end()const
+    {
+        return iterator(m_head,nullptr,m_tail);
     }
 };
 

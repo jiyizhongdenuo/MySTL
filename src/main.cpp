@@ -1,5 +1,6 @@
 #include<iostream>
 #include"MyListT.h"
+#include<limits.h>
 using namespace std;
 
 ostream& operator<<(ostream & os, MyListT<int>& l)
@@ -39,7 +40,17 @@ int main()
     printl("删除头尾节点后：",ls);
     ls.insert(++ls.begin(),66);
     ls.erase(ls.begin());//end()为null节点。
+    // MyListT<int> lls(ls);
     printl("insert之后",ls);
+    
+
+    const MyListT<int> cls(ls);
+    typedef typename MyListT<int>::const_iterator CIT;
+    for(CIT cit=cls.begin();cit!=cls.end();++cit)
+    {
+        cout<<*cit<<" ";
+    }
+    cout<<endl;
     return 0;
 }
 
