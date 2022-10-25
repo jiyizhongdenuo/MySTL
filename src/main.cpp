@@ -51,6 +51,7 @@ int main()
         cout<<*cit<<" ";
     }
     cout<<endl;
+    cout<<endl;
     return 0;
 }
 
