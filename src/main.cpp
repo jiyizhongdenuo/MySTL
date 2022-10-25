@@ -42,16 +42,16 @@ int main()
     ls.erase(ls.begin());//end()为null节点。
     // MyListT<int> lls(ls);
     printl("insert之后",ls);
-    
+    find(ls.begin(),ls.end(),4);
 
-    const MyListT<int> cls(ls);
-    typedef typename MyListT<int>::const_iterator CIT;
-    for(CIT cit=cls.begin();cit!=cls.end();++cit)
-    {
-        cout<<*cit<<" ";
-    }
-    cout<<endl;
-    cout<<endl;
+    // const MyListT<int> cls(ls);
+    // typedef typename MyListT<int>::const_iterator CIT;
+    // for(CIT cit=cls.begin();cit!=cls.end();++cit)
+    // {
+    //     cout<<*cit<<" ";
+    // }
+    // cout<<endl;
+    // cout<<endl;
     return 0;
 }
 
