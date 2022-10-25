@@ -262,5 +262,15 @@ public:
     }
 };
 
+template<class IT,class T>IT find(IT const& s,IT const& e,T const& data)
+{
+    for(IT it=s;it!=e;it++)
+    {
+        if(data==*it)
+        return it;
+    }
+    return e;
+}
+
 
 #endif
