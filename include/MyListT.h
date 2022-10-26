@@ -264,12 +264,21 @@ public:
 
 template<class IT,class T>IT find(IT const& s,IT const& e,T const& data)
 {
-    for(IT it=s;it!=e;it++)
+    for(IT it=s;it!=e;++it)
     {
         if(data==*it)
         return it;
     }
     return e;
+}
+template<class MIT>void sort(MIT const& begin,MIT const& end)
+{
+    MIT b=begin;
+    MIT it=end;
+    for(MIT i=begin,j=end;i!=j)
+    {
+        
+    }
 }
 
 

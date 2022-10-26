@@ -42,7 +42,12 @@ int main()
     ls.erase(ls.begin());//end()为null节点。
     // MyListT<int> lls(ls);
     printl("insert之后",ls);
-    find(ls.begin(),ls.end(),4);
+    typedef typename MyListT<int>::iterator  IT;
+    IT nit=find(ls.begin(),ls.end(),4);
+    ls.insert(nit,100);
+    nit=find(ls.begin(),ls.end(),1);
+    ls.erase(nit);
+    printl("插入之后的链表",ls);
 
     // const MyListT<int> cls(ls);
     // typedef typename MyListT<int>::const_iterator CIT;
