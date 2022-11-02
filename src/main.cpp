@@ -22,6 +22,16 @@ void printl(string const& str,MyListT<int>& ls)
     }
     cout<<endl;
 }
+
+class compare
+{
+public:
+    compare() =default;
+    bool operator()(int const& i,int const& j)
+    {
+        return i<j;
+    }
+};
 int main()
 {
     MyListT<int> ls;
@@ -47,8 +57,18 @@ int main()
     ls.insert(nit,100);
     nit=find(ls.begin(),ls.end(),1);
     ls.erase(nit);
+    nit=find(ls.begin(),ls.end(),0);
+    ls.erase(nit);
     printl("插入之后的链表",ls);
+    compare com;
+    // sort(ls.begin(),ls.end());
+    // printl("排序后的ls:",ls);
+    sort(ls.begin(),ls.end(),com);
+    printl("反向排序之后的ls:",ls);
+    sort(ls.rbegin(),ls.rend(),com);
+    printl("反向迭代器排序之后的ls:",ls);
 
+    
     // const MyListT<int> cls(ls);
     // typedef typename MyListT<int>::const_iterator CIT;
     // for(CIT cit=cls.begin();cit!=cls.end();++cit)

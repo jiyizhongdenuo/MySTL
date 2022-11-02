@@ -12,7 +12,7 @@
 				"-I",
 				"${workspaceFolder}\\include",
 				// "${workspaceFolder}\\*.cpp",
-				"${workspaceFolder}\\src\\main.cpp",
+				"${workspaceFolder}\\src\\adapter_main.cpp",
 				// "-pthread",
 				// "${file}",
 				// "${fileDirname}\\${fileBasenameNoExtension}.cpp",

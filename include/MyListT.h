@@ -156,7 +156,7 @@ public:
             if(m_cur==nullptr)
                 m_cur=m_end;
             else    
-                m_cur=m_cur->prev;
+                m_cur=m_cur->m_prev;
             return *this;
         }
         T& operator*()
@@ -239,11 +239,11 @@ public:
             --m_it;
             return *this;
         }
-        bool operator==(const_iterator const & that)
+        bool operator==(const_iterator const & that)const 
         {
             return m_it==that.m_it;
         }
-        bool operator!=(const_iterator const& that)
+        bool operator!=(const_iterator const& that)const 
         {
             return !(*this==that);
         }
@@ -260,6 +260,58 @@ public:
     {
         return iterator(m_head,nullptr,m_tail);
     }
+//
+//反向迭代器
+    class riterator
+    {
+    public:
+        riterator()=default;
+        riterator(node* start,node* cur,node* end):m_start(start),m_cur(cur),m_end(end){}
+        riterator& operator++()
+        {
+            if(m_cur==nullptr)
+                m_cur=m_end;
+            else 
+                m_cur=m_cur->m_prev;
+            return *this;
+        }
+        riterator& operator--()
+        {
+            if(m_cur==nullptr)
+                m_cur=m_start;
+            else    
+                m_cur=m_cur->m_next;
+            return *this;
+        }
+        T& operator*()
+        {
+            if(nullptr==m_cur)
+                throw underflow_error("null node!");
+            return m_cur->m_data;
+        }
+        bool operator==(riterator const& that)const
+        {
+            return m_start==that.m_start &&m_cur==that.m_cur && m_end==that.m_end;
+        }
+        bool operator!=(riterator const& that)const
+        {
+            return !(*this==that);
+        }
+    private:
+        node * m_start;
+        node * m_cur;
+        node * m_end;
+        friend class MyListT;
+    };
+
+    riterator rbegin()//不能返回引用，因为会创建一个类来接收，返回的引用是个右值
+    {
+        return riterator(m_head,m_tail,m_tail);
+    }
+    riterator rend()
+    {
+        return riterator(m_head,nullptr,m_tail);
+    }
 };
 
 template<class IT,class T>IT find(IT const& s,IT const& e,T const& data)
@@ -271,15 +323,69 @@ template<class IT,class T>IT find(IT const& s,IT const& e,T const& data)
     }
     return e;
 }
+//排序
 template<class MIT>void sort(MIT const& begin,MIT const& end)
 {
-    MIT b=begin;
-    MIT it=end;
-    for(MIT i=begin,j=end;i!=j)
+    MIT p=begin;
+    MIT last=end;
+    --last;
+    for(MIT i=begin,j=last;i!=j;)
     {
-        
+        while(i!=p && *i<*p)
+            ++i;
+        if(i!=p)
+        {
+            swap(*i,*p);
+            p=i;
+        }
+        while(j!=p && *p<*j)
+            --j;
+        if(j!=p)
+        {
+            swap(*p,*j);
+            p=j;
+        }
     }
+    MIT it=begin;
+    ++it;
+    if(p!=it && p!=begin)
+        sort(begin,p);
+    it=p;
+    ++it;
+    if(it!=end && it!=last)
+        sort(it,end);
 }
-
+//使用比较器进行排列
+template<class IT,class CMP>void sort(IT const& begin,IT const& end,CMP cmp)
+{
+    IT p=begin;
+    IT last=end;
+    --last;
+    for(IT i=begin,j=last;i!=j;)
+    {
+        while(i!=p && cmp(*i,*p))
+            ++i;
+        if(i!=p)
+        {
+            swap(*i,*p);
+            p=i;
+        }
+        while(j!=p && cmp(*j,*p))
+            --j;
+        if(j!=p)
+        {
+            swap(*j,*p);
+            j=p;
+        }
+    }
+    IT it=begin;
+    ++it;
+    if(p!=begin && p!=it)
+        sort(begin,p,cmp);
+    it=p;
+    ++it;
+    if(it!=last && it!=end)
+        sort(it,end,cmp);
+}
 
 #endif
