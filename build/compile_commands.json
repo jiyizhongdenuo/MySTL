@@ -1,0 +1,12 @@
+[
+{
+  "directory": "E:/C++STL/build/src",
+  "command": "F:\\MinGW\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp -g -o CMakeFiles\\main.dir\\MRBTree.cpp.obj -c E:\\C++STL\\src\\MRBTree.cpp",
+  "file": "E:/C++STL/src/MRBTree.cpp"
+},
+{
+  "directory": "E:/C++STL/build/src",
+  "command": "F:\\MinGW\\bin\\g++.exe  @CMakeFiles/main.dir/includes_CXX.rsp -g -o CMakeFiles\\main.dir\\MTest.cpp.obj -c E:\\C++STL\\src\\MTest.cpp",
+  "file": "E:/C++STL/src/MTest.cpp"
+}
+]
