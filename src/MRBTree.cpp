@@ -5,8 +5,8 @@
 #include<utility>
 #include<assert.h>
 #include<cstring>
-#include"MTest.h"
-#include"MTest.cpp"
+// #include"MTest.h"
+// #include"MTest.cpp"
 using namespace std;
 // using std::pair;
 
@@ -57,7 +57,7 @@ template<class Key,class Value>
 void MRBTree<Key,Value>::InsertFixup(MRBTreeNode<Key,Value>* n)
 {
     rbn uncle;
-    while(n->parent->color==red)
+    while(n->parent->color==red) 
     {
         if(n->parent==n->parent->parent->left)
         {
